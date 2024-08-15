@@ -5,6 +5,7 @@ import React,{useState} from 'react'
 
 
  export default function Textform(props) {
+  
     const handleUpClick = () =>{
     //  console.log("Uppercase was clicked"+text);
         let newText=text.toUpperCase();
@@ -74,11 +75,15 @@ import React,{useState} from 'react'
           }
           props.showAlert("Extracted special characters","success");
         };
+        
         const handleCopy = () => {
-          navigator.clipboard.writeText(text); 
+          var text = document.getElementById("mybox");
+          text.select();
+          navigator.clipboard.writeText(text.value);
+          document.getSelection().removeAllRanges();
           props.showAlert("Copied to Clipboard!", "success");
       }
-  
+      
     
           
 
@@ -102,23 +107,23 @@ import React,{useState} from 'react'
         <textarea className="form-control" value={text} onChange={handleonChange} style={{backgroundColor:props.mode==='dark'?'#13466e':'white',color:props.mode==='dark'?'white':'#042743'}} id="mybox" rows="8"></textarea>
 
       </div>
-      <button className='btn btn-primary mx-3' onClick={handleUpClick}>Convert to uppercase</button>
-      <button className='btn btn-primary mx-3' onClick={handlelowClick}>Convert to lowercase</button>
-      <button className='btn btn-primary mx-3' onClick={clearText}>Clear Text</button>
-      <button className='btn btn-primary mx-3' onClick={handleCapitalize}>Sentence case</button>
-      <button className='btn btn-primary mx-3' onClick={reversed}>Reverse Text</button>
-      <button className="btn btn-primary mx-3" onClick={extractNumbers}>Extract Numbers</button>
-      <button className="btn btn-primary mx-3" onClick={handleExtraSpaces}>Remove Extra spaces</button>
-      <button className="btn btn-primary mx-3" style={{ marginTop: '10px' }} onClick={extractSpecialChars}>Extract Special Characters</button>
-      <button className="btn btn-primary mx-3" style={{ marginTop: '10px' }} onClick={handleCopy}>Copy to Clipboard</button>
-      <button  type="submit" onClick={speak} className="btn btn-primary mx-1 margin-top-2px"  style={{ marginTop: '10px' }} >Speak</button>
+      <button disabled={text.length===0}className='btn btn-primary mx-3 my-1' onClick={handleUpClick}>Convert to uppercase</button>
+      <button disabled={text.length===0} className='btn btn-primary mx-3 my-1' onClick={handlelowClick}>Convert to lowercase</button>
+      <button disabled={text.length===0} className='btn btn-primary mx-3 my-1' onClick={clearText}>Clear Text</button>
+      <button disabled={text.length===0} className='btn btn-primary mx-3 my-1' onClick={handleCapitalize}>Sentence case</button>
+      <button disabled={text.length===0} className='btn btn-primary mx-3 my-1' onClick={reversed}>Reverse Text</button>
+      <button disabled={text.length===0} className="btn btn-primary mx-3 my-1" onClick={extractNumbers}>Extract Numbers</button>
+      <button disabled={text.length===0} className="btn btn-primary mx-3 my-1" onClick={handleExtraSpaces}>Remove Extra spaces</button>
+      <button disabled={text.length===0} className="btn btn-primary mx-3 my-1" style={{ marginTop: '10px' }} onClick={extractSpecialChars}>Extract Special Characters</button>
+      <button disabled={text.length===0} className="btn btn-primary mx-3 my-1" style={{ marginTop: '10px' }} onClick={handleCopy}>Copy to Clipboard</button>
+      <button disabled={text.length===0}  type="submit" onClick={speak} className="btn btn-primary mx-1 margin-top-2px"  style={{ marginTop: '10px' }} >Speak</button>
     
       
     </div>
     <div className="container my-3" style={{color:props.mode==='dark'?'white':'#042743'}}>
       <h1>Your text summary</h1>
-      <p>{text.trim().split(/\s+/).length} words, {text.length} characters</p>
-      <p>{0.008*text.split(" ").length}Minutes to read </p>
+      <p>{text.trim().split(/\s+/).filter((element)=>{return element.length!==0}).length} words, {text.length} characters</p>
+      <p>{0.008*text.split(" ").filter((element)=>{return element.length!==0}).length}Minutes to read </p>
       <h2>Preview</h2>
       <p>{text.length>0?text:"Nothing to preview!"}</p>
     </div>

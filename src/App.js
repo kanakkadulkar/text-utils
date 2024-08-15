@@ -3,9 +3,11 @@ import './App.css';
 import Alert from './components/Alert';
 import Navbar from './components/Navbar';
 import Textform from './components/Textform';
-//import About from './components/About';
+import About from './components/About';
 import React,{useState} from 'react';
-//import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router,
+   Routes,
+   Route } from 'react-router-dom';
 
 function App() {
   const[mode,setMode]=useState('light');
@@ -44,18 +46,16 @@ function App() {
     
     {/* /users --> Component 1
         /users/home --> Component 2 */}
-    
-    {/* <Router> */}
-      <Navbar title="TextUtils" mode={mode} toggleMode={toggleMode} aboutText={'About'} />
-       <Alert alert={alert} />
-       <Textform showAlert={showAlert} heading={"Enter your text to analyze below"} mode={mode} />
-      {/* <div className="container my-3">
+  <Router>
+      <Navbar title="TextUtils" mode={mode} toggleMode={toggleMode} aboutText="About" />
+      <Alert alert={alert} />
+      <div className="container my-3">
         <Routes>
-          <Route exact path="/about" element={<About />} />
-          <Route exact path="/" element={<Textform showAlert={showAlert} heading={"Enter your text to analyze below"} mode={mode} />} />
+          <Route path="/about" element={<About mode={mode} />} />
+          <Route path="/" element={<Textform showAlert={showAlert} heading="TextUtils - Your All-in-One Tool: Word Count, Case Conversion, and Voice Output" mode={mode} />} />
         </Routes>
       </div>
-    </Router>  */}
+    </Router>
     </>
   );
 }

@@ -1,5 +1,5 @@
 {  
-    "homepage": "https://kanakkadulkar.github.io/text-utils",
+ 
     "name": "text-utils",
     "version": "0.1.0",
     "private": false,
@@ -17,8 +17,7 @@
     },
     "scripts": {
         
-        "predeploy": "npm run build",
-        "deploy": "gh-pages -d build ",
+      
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",

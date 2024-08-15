@@ -1,35 +1,24 @@
-import React, { useState } from 'react'
+//import React, { useState } from 'react'
 
 
 
-export default function About() {
+export default function About(props) {
 
-  const[myStyle,setMystyle]= useState({
-    color:'white',
-    backgroundColor:'black',
+  // const[myStyle,setMystyle]= useState({
+  //   color:'white',
+  //   backgroundColor:'black',
     
-  })
-
-const[btntext,setBtnText]=useState("Enable dark mode");
-
-  const toggleStyle=()=>{
-
-     if(myStyle.color ==='black'){
-      setMystyle({
-        color:'white',
-        backgroundColor:'black',
-        border:'2px solid white'
-      })
-      setBtnText("Enable dark mode");
-    }
-      else{
-      setMystyle({
-        color:'black',
-        backgroundColor:'white'
-      })
-      setBtnText("Enable white mode");
-    }
+  // })
+  let myStyle={
+    color:props.mode==='dark'?'white':'black',
+    backgroundColor:props.mode==='dark'?'#13466e':'white',
+   
+    borderColor:props.mode ==='dark'?'white':'#13466e'
   }
+
+
+
+ 
      
   
   return (
@@ -84,9 +73,7 @@ Thank you for choosing Text Utils. We hope our app becomes an invaluable part of
     </div>
   </div>
 </div>
-<div className="container my-3">
-      <button onClick={toggleStyle} type="button" className="btn btn-primary">{btntext}</button>
-</div>
+
     </div>
   )
 }
